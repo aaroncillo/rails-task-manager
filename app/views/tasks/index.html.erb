@@ -1,5 +1,31 @@
 <h1>My Tasks</h1>
-
+<ul>
 <% @tasks.each do |task| %>
-<li><%= link_to task.title, task_path%> </li>
+<li><%= link_to task.title, task_path(task) %> <%= link_to task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+   <i class="fas fa-trash-alt"></i>
 <% end %>
+</li>
+<% end %>
+</ul>
+<hr>
+<%= link_to "Add a new task", new_task_path %>
+
+<button id="ledButton">Encender LED</button>
+
+<script>
+  const ledButton = document.getElementById("ledButton");
+
+  ledButton.addEventListener("click", () => {
+    fetch("http://192.168.1.82/led", { method: "POST" })
+      .then(response => {
+        if (response.ok) {
+          console.log("LED state changed successfully");
+        } else {
+          console.error("Failed to change LED state");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  });
+</script>

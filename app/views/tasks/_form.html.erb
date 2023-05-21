@@ -1,0 +1,8 @@
+<div class="container w-50 border shadow mt-5">
+<%= simple_form_for task do |f| %>
+  <%= f.input :title %>
+  <%= f.input :details %>
+  <%= f.submit %>
+<% end %>
+</div>
+<%= link_to "Back to list", tasks_path %>
